@@ -1,0 +1,26 @@
+# Function to send a poll question
+def send_poll_question():
+    # Select a random poll question from the list
+    import random
+    poll = random.choice(poll_questions)
+    
+    # Send the poll question to the users using your messaging service (Twilio or WhatsApp)
+    # Replace 'YOUR_TOKEN_HERE' with your actual token
+    message = f"Poll Question: {poll['question']}\n"
+    for idx, choice in enumerate(poll['choices']):
+        message += f"{idx+1}. {choice}\n"
+    
+    # Function to send message using your token (replace 'YOUR_TOKEN_HERE' with your actual token)
+    def send_message_using_token(token, message):
+        print(f"Sending message: {message} with token: {token}")
+        # Add code here to send the message using your messaging service API
+    
+    send_message_using_token('6702381412:AAHb6cT1sJVxOVjiTADrF15xznfhHqgk9KY', message)  # Replace this with your actual method for sending messages
+    
+    # Collect responses from users
+    response = input("Enter your choice (1, 2, 3, ...): ")
+    
+    # Store the response in the poll_responses dictionary
+    if poll['question'] not in poll_responses:
+        poll_responses[poll['question']] = {}
+    poll_responses[poll['question']][response] = poll['choices'][int(response)-1]
